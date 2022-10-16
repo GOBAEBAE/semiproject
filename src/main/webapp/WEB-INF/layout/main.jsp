@@ -77,9 +77,7 @@
             <a>지역별 카페 바로가기</a>
         </div>
         <div class="loc-slide swiper-container">
-            <div class="quick-search swiper-wrapper"
-                <a href="#" class="icon swiper-slide" style="background-color: #664400;"><span
-                        class="label">선호지역 ></span></a>
+            <div class="quick-search swiper-wrapper">
                 <a class="swiper-slide" href="map/mainmap?lat=37.5252228&lng=127.0349241&zoom=15"
                    style="background-image: url(https://d21sjc85fy47a6.cloudfront.net/aaaaaqx/md/0706apgujeong.jpg?small200);"><span
                         class="label">압구정 / 청담</span></a>
