@@ -290,12 +290,5 @@ public class ComFeedController {
         cmtService.insertFeedCmt(dto);
         return dto;
     }
-
-/*    @PostMapping("/select_cmt")
-    @ResponseBody
-    public List<ComFeedCmtDto> selectFeedCmt(int fd_id){
-        return cmtService.selectFeedCmt(fd_id);
-    }*/
-
 }
 

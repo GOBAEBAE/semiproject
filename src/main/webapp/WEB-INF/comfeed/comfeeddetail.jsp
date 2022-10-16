@@ -292,8 +292,7 @@
                                 var fl_cnt=res.fl_cnt;
                                 var pre_fl_cnt=$("#fl-cnt").text();
                                 if (pre_fl_cnt==0){
-                                    $(".fdlike").find("svg").removeClass("fas");
-                                    $(".fdlike").find("svg").addClass("far");
+                                    $(".fdlikes").find("svg").attr("data-prefix","fas");
                                 }
                                 $("#fl-cnt").html(fl_cnt);
                             }
@@ -308,8 +307,7 @@
                                 var fl_cnt=res.fl_cnt;
                                 var pre_fl_cnt=$("#fl-cnt").text();
                                 if (pre_fl_cnt==1){
-                                    $(".fdlike").find("svg").removeClass("far");
-                                    $(".fdlike").find("svg").addClass("fas");
+                                    $(".fdlikes").find("svg").attr("data-prefix","far");
                                 }
                                 $("#fl-cnt").html(fl_cnt);
                             }
@@ -331,7 +329,7 @@
 
     $(".cmtinsert").click(function (){
 
-        if(lg_id==null){
+        if(lg_id==""){
             alert("로그인이 필요합니다")
             return
         }
@@ -351,29 +349,7 @@
                 $(".fdcmt").append(s);
             }
         })
-
-        /*$.ajax({
-            type:"post",
-            url:"select_cmt",
-            data: {"fd_id":fd_id},
-            dataType: "json",
-            success: function (res){
-
-                $.each(res,function (item){
-                    var s=""
-                    s+="<div><img src='${root}/res/prfimg/"+item.ur_img+"'</div>";
-                    s+="<span>"+item.fm_txt+"</span></div>"
-                    $(".fdcmt").append(s);
-                })
-            }
-        })*/
-
-
     })
-
-
-
-
 
 </script>
 </body>
