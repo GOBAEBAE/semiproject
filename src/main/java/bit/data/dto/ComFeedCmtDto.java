@@ -8,6 +8,9 @@ import java.sql.Timestamp;
 public class ComFeedCmtDto {
     private int fm_id;
     private int fd_id;
+    private int ur_id;
+    private String ur_img;
+    private String ur_nk;
     private String fm_txt;
     private Timestamp w_date;
     private Timestamp u_date;

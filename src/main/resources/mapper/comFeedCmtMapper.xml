@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bit.data.dao.ComFeedCmtDao">
+    <insert id="insertFeedCmt" parameterType="fdcdto">
+        INSERT into fd_cmt (fd_id,ur_id,fm_txt,w_date) values (#{fd_id},#{ur_id},#{fm_txt},now())
+    </insert>
+    <select id="selectFeedCmt" parameterType="int" resultType="fdcdto">
+        SELECT * from fd_cmt where fd_id=#{fd_id}
+    </select>
+</mapper>

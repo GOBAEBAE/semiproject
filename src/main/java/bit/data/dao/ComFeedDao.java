@@ -1,7 +1,6 @@
 package bit.data.dao;
 
 import bit.data.dto.ComFeedDto;
-import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
