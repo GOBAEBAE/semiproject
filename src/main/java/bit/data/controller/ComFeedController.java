@@ -1,9 +1,11 @@
 package bit.data.controller;
 
 import bit.data.dto.CafeDto;
+import bit.data.dto.ComFeedCmtDto;
 import bit.data.dto.ComFeedDto;
 import bit.data.dto.UserDto;
 import bit.data.service.CafeServiceInter;
+import bit.data.service.ComFeedCmtServiceInter;
 import bit.data.service.ComFeedServiceInter;
 import bit.data.service.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class ComFeedController {
 
     @Autowired
     UserServiceInter userService;
+
+    @Autowired
+    ComFeedCmtServiceInter cmtService;
 
     @GetMapping("/main")
     public String list(@RequestParam(value = "searchcolumn", required = false) String sc,
@@ -156,9 +161,16 @@ public class ComFeedController {
         int fd_lk = comFeedService.selectTotalFeedLikes(fd_id);
         comFeedDto.setLikes(fd_lk);
 
+        List<ComFeedCmtDto> list1=cmtService.selectFeedCmt(fd_id);
+        for(ComFeedCmtDto dto:list1){
+            dto.setUr_nk(userService.selectDataById(dto.getUr_id()).getUr_nk());
+            dto.setUr_img(userService.selectDataById(dto.getUr_id()).getUr_img());
+        }
+
         mview.addObject("comfeeddto", comFeedDto);
         mview.addObject("cafedto",cafeDto);
         mview.addObject("userdto",userDto);
+        mview.addObject("list1",list1);
 
         mview.setViewName("comfeed/comfeeddetail");
         return mview;
@@ -270,5 +282,13 @@ public class ComFeedController {
         comFeedService.updateFeedLikes(fd_id);
     }
 
+    @PostMapping("/insert_cmt")
+    @ResponseBody
+    public ComFeedCmtDto insertFeedCmt(ComFeedCmtDto dto){
+        dto.setUr_nk(userService.selectDataById(dto.getUr_id()).getUr_nk());
+        dto.setUr_img(userService.selectDataById(dto.getUr_id()).getUr_img());
+        cmtService.insertFeedCmt(dto);
+        return dto;
+    }
 }
 

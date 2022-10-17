@@ -75,6 +75,26 @@
             height: 95%;
             border: hidden;
             text-align: left;
+
+        }
+
+        .table .fdcmt div{
+            margin-bottom: 15px;
+        }
+
+        .table .fdcmt div img{
+            height: 30px;
+            width: 30px;
+            border-radius: 100%;
+            margin-right: 10px;
+        }
+
+        .table .fdcmt b{
+            margin-right: 10px;
+        }
+
+        .table .fdcmt span{
+            font-size: 15px;
         }
 
         .table .fdmpl{
@@ -194,6 +214,12 @@
         </tr>
         <tr>
             <td class="fdcmt">
+                <c:forEach var="dto" items="${list1}">
+                    <div>
+                        <img src="${root}/res/prfimg/${dto.ur_img}"><b>${dto.ur_nk}</b>
+                        <span>${dto.fm_txt}</span>
+                    </div>
+                </c:forEach>
             </td>
         </tr>
         <tr>
@@ -224,8 +250,8 @@
         </tr>
         <tr>
             <td class="fdcmtform">
-                <input type="text" placeholder="댓글 달기...">
-                <button type="submit">등록</button>
+                <input type="text" id="fmtxt" placeholder="댓글 달기...">
+                <button class="cmtinsert">등록</button>
             </td>
         </tr>
     </table>
@@ -267,8 +293,7 @@
                                 var fl_cnt=res.fl_cnt;
                                 var pre_fl_cnt=$("#fl-cnt").text();
                                 if (pre_fl_cnt==0){
-                                    $(".fdlike").find("svg").removeClass("fas");
-                                    $(".fdlike").find("svg").addClass("far");
+                                    $(".fdlikes").find("svg").attr("data-prefix","fas");
                                 }
                                 $("#fl-cnt").html(fl_cnt);
                             }
@@ -283,8 +308,7 @@
                                 var fl_cnt=res.fl_cnt;
                                 var pre_fl_cnt=$("#fl-cnt").text();
                                 if (pre_fl_cnt==1){
-                                    $(".fdlike").find("svg").removeClass("far");
-                                    $(".fdlike").find("svg").addClass("fas");
+                                    $(".fdlikes").find("svg").attr("data-prefix","far");
                                 }
                                 $("#fl-cnt").html(fl_cnt);
                             }
@@ -294,16 +318,39 @@
                     $.ajax({
                         type:"post",
                         url:"update_like",
-                        dataType:"json",
                         data:{"fd_id":fd_id},
-                        success: function (res){
-                            alert("좋아요")
+                        success: function (){
+
                         }
                     })
                 }
             })
         }
     }
+
+    $(".cmtinsert").click(function (){
+
+        if(lg_id==""){
+            alert("로그인이 필요합니다")
+            return
+        }
+
+        fm_txt = document.getElementById("fmtxt").value;
+
+        $.ajax({
+            type:"post",
+            url:"insert_cmt",
+            data:{"fd_id":fd_id,"ur_id":lg_id,"fm_txt":fm_txt},
+            dataType:"json",
+            success: function (res){
+                var s=""
+                s+="<div><img src='${root}/res/prfimg/"+res.ur_img+"'><b>";
+                s+=res.ur_nk+"</b><span>";
+                s+=res.fm_txt+"</span></div>"
+                $(".fdcmt").append(s);
+            }
+        })
+    })
 
 </script>
 </body>

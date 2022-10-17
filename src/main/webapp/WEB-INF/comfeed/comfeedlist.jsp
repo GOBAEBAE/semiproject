@@ -143,9 +143,9 @@
     </div>
 </div>
 <div class="feedmenu">
-    <a type="button" class="btn" id="btnrank"><i class="bi bi-trophy"></i></a>
-    <a type="button" class="btn" id="btnform"><i class="bi bi-plus-square"></i></a>
-    <a type="button" class="btn" id="btnmain" onclick="location.reload()"><i class="bi bi-house-door"></i></a>
+    <a type="button" class="btn" id="btnrank" title="top 10 게시물"><i class="bi bi-trophy"></i></a>
+    <a type="button" class="btn" id="btnform" title="피드 작성"><i class="bi bi-plus-square"></i></a>
+    <a type="button" class="btn" id="btnmain" title="메인으로" onclick="location.reload()"><i class="bi bi-house-door"></i></a>
 </div>
 <br>
 
