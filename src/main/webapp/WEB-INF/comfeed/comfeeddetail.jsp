@@ -75,6 +75,7 @@
             height: 95%;
             border: hidden;
             text-align: left;
+
         }
 
         .table .fdcmt div{

@@ -130,7 +130,7 @@ public class MapController {
                 planService.insertPlanLoc(plocdto);
             }
         }
-        return "redirect:mainmap";
+        return "redirect:../mypage/plan";
     }
 
     @GetMapping("/getcafedata")
