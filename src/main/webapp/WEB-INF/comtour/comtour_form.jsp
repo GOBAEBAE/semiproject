@@ -31,7 +31,7 @@
       <table class="table table-bordered" style="width: 1000px">
           <tr>
               <th colspan="3" style="width: 1000px; text-align: center">새 게시물 만들기
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" style="float: right"></button>
+                  <button onclick="location.href='list'" type="button" class="btn-close" data-bs-dismiss="modal" style="float: right"></button>
               </th>
 
           </tr>

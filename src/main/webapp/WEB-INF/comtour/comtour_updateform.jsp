@@ -21,7 +21,7 @@
 </head>
 <body>
 
-${dto}
+
 
 <form action="update" method="post">
     <input type="hidden" name="tr_id" value="${dto.tr_id}">
@@ -29,7 +29,7 @@ ${dto}
         <table class="table table-bordered" style="width: 1000px">
             <tr>
                 <th colspan="3" style="width: 1000px; text-align: center">게시정보 수정
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" style="float: right"></button>
+                    <button onclick="location.href='detail?tr_id=${dto.tr_id}'" type="button" class="btn-close" data-bs-dismiss="modal" style="float: right"></button>
                 </th>
 
             </tr>
