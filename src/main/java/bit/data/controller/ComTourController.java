@@ -2,6 +2,7 @@ package bit.data.controller;
 
 import bit.data.dto.ComFeedDto;
 import bit.data.dto.ComTourDto;
+import bit.data.service.ComTourPartServiceInter;
 import bit.data.service.ComTourServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ import java.util.Map;
 public class ComTourController {
     @Autowired
     ComTourServiceInter comTourService;
+
+    @Autowired
+    ComTourPartServiceInter partService;
 
     @GetMapping("/comtour/form")
     public String comtourform()
@@ -76,13 +80,11 @@ public class ComTourController {
 
     @PostMapping("/comtour/crwcount")
     @ResponseBody
-    public Map<String,Integer> getCrwCount(int ur_id, int tr_id)
+    public int getCrwCount(int ur_id, int tr_id)
     {
-        Map<String, Integer> map = new HashMap<>();
-        int count = comTourService.getCrwCount(ur_id, tr_id);
+        int tw_cnt = comTourService.getCrwCount(ur_id, tr_id);
         //System.out.println("넘오온 숫자:"+count);
-        map.put("count", count);
-        return map;
+        return tw_cnt;
 
     }
 
@@ -99,11 +101,14 @@ public class ComTourController {
         int totalCount = comTourService.getTotalCount(sc,sw);
 
         //검색정보에 해당하는 list를 선언
-        List<ComTourDto> list = comTourService.getPagingList(sc,sw);
-
+        List<ComTourDto> trlist = comTourService.getPagingList(sc,sw);
+        for (ComTourDto trdto:trlist){
+            int tw_cnt = partService.getTotalCount(trdto.getTr_id());
+            trdto.setTw_cnt(tw_cnt);
+        }
         //model에 입력하기
         model.addAttribute("totalCount",totalCount);
-        model.addAttribute("list", list);
+        model.addAttribute("trlist", trlist);
         return "/bit/comtour/comtour_list";
 
     }
@@ -117,6 +122,9 @@ public class ComTourController {
             @RequestParam(defaultValue = "0") int tm_id) /*tr_cmt의 PK(tr_id는)*/
     {
         ComTourDto dto = comTourService.getData(num); // tr 테이블의 정보가 dto에 담겨서 넘어오는데 조인임
+        int tw_cnt=partService.getTotalCount(num);
+        dto.setTw_cnt(tw_cnt);
+
         //System.out.println(dto);
         ModelAndView mview = new ModelAndView();
         mview.addObject("dto",dto);

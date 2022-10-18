@@ -53,8 +53,8 @@
         li.main > a {
             display: block;
             width: 180px;
-            font-family: 'Jua';
             font-size: 20px;
+            color: #664400;
         }
 
         li.main > a:hover {
@@ -65,8 +65,9 @@
 <body>
 <!-- 로고 버튼 누르면 홈으로 -->
 <c:set var="root" value="<%=request.getContextPath()%>"/>
+<c:set var="on_error_prf" value="this.src='${root}/images/noprofile.jpg'"/>
 <a href="${root}/" class="logotitle">
-    <img src="${root}/images/logosimple.png" class="rounded-circle" width="40" height="40">
+    <img src="${root}/images/logosimple.png"  class="rounded-circle" width="40" height="40">
     <b> Coffee With </b></a>
 
 <!-- 메뉴 구성 -->
@@ -113,7 +114,7 @@
     <!-- 로그인 성공한 상태일 때 -->
     <c:if test="${sessionScope.login_ok=='yes'}">
         <!-- 회원 프로필 사진 -->
-        <img src="${root}/res/prfimg/${sessionScope.login_img}" class="rounded-circle" width="40" height="40">
+        <img src="${root}/res/prfimg/${sessionScope.login_img}" onerror="${on_error_prf}" class="rounded-circle" width="40" height="40">
         <!-- 회원 닉네임 -->
         <b>${sessionScope.login_nick} 님 </b>
         <!-- 마이페이지 폼 이동 -->

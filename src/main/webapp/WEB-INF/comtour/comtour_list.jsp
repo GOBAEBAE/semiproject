@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,8 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../res/css/style.css" type="text/css">
+    <script src="https://use.fontawesome.com/releases/v6.2.0/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" />
     <c:set var="root" value="<%=request.getContextPath()%>"/>
     <style type="text/css">
 
@@ -55,6 +57,127 @@
             box-shadow: 5px 5px 5px gray;
             cursor: pointer;
         }
+        /*tr-container*/
+        div.tr-container{
+            width: 1136px;
+        }
+        div.tr-cont-box{
+            margin-left: 5px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 410px 410px 410px 410px;
+        }
+        div.tr-card {
+            width: 270px;
+            height: 400px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            margin-right: 10px;
+        }
+        div.tri-card {
+            width: 270px;
+            overflow: hidden;
+            opacity: 0.7;
+            background: 50% 50% no-repeat;
+            padding: 10px 10px 10px 10px ;
+            height: 270px;
+            display: grid;
+            grid-template-columns: 5fr 1fr ;
+        }
+
+        div.tr-cont-card{
+            padding: 10px 10px 10px 10px;
+        }
+
+        span.tr-cont-tw-g{
+            position: relative;
+            top:7px;
+            left:180px;
+            text-align: center;
+            padding: 15px 10px 10px 10px;
+            width: 70px;
+            height: 70px;
+            border-radius: 100px;
+            box-sizing: border-box;
+            background-color: yellowgreen;
+            opacity: 1;
+            color: white;
+            font-size: 15px;
+        }
+        span.tr-cont-tw-r{
+            position: relative;
+            top:7px;
+            left: 180px;
+            text-align: center;
+            padding: 15px 10px 10px 10px;
+            width: 70px;
+            height: 70px;
+            border-radius: 100px;
+            box-sizing: border-box;
+            background-color: orangered;
+            opacity: 1;
+            color: white;
+            font-size: 15px;
+        }
+        .tr-cont-loc{
+            position: absolute;
+            margin-top: 5px;
+            color: white;
+            font-size: 0.8rem;
+            margin-left: 3px;
+            padding: 7px 10px 3px 7px;
+            background-color: rgba(0,0,0,0.6);
+            border-radius: 100px;
+        }
+        .tr-cont-loc i{
+            color: white;
+            font-size: 15px;
+            opacity: 1;
+        }
+        .tr-cont-tit{
+            text-align: center;
+            font-size: 1.5rem;
+            text-overflow:ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-bottom: 15px;
+        }
+
+        img.tr-prf{
+            width: 30px;
+            height: 30px;
+            border-radius: 50px;
+        }
+        div.tr-cont-ur{
+            font-size: 1rem;
+        }
+
+        div.tr-cont-date{
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+        div.tr-cont-txt{
+            text-overflow:ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        .tr-card-hr{
+            margin: 5px 0 10px 0;
+        }
+        div.tr-cont-bottom{
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+        }
+        div.tr-cont-bottom span{
+            font-size: 1rem;
+            color: gray;
+        }
+        div.tr-cont-bottom span svg{
+            font-size: 1rem;
+            color: gray;
+        }
     </style>
 
     <script>
@@ -76,12 +199,11 @@
         });//스크립트 전체 함수 영역
     </script>
 </head>
-<c:set var="root" value="<%=request.getContextPath()%>"/>
 <div class="flex">
     <form action="list">
-            <div class="input-group" style="margin-left: 30px; width: 700px;">
+            <div class="input-group" style="margin-left: 30px; width: 1000px;">
                 <!--검색 영역-->
-                <select name="searchcolumn" class="form-select" style="300px;">
+                <select name="searchcolumn" class="form-select" style=" width: 80px;">
                     <option value="tr_loc">투어도시</option>
                     <option value="s_date">출발날짜</option>
                 </select>
@@ -101,52 +223,56 @@
 <%--<a href="list?searchcolumn=tr_id&searchword=${sessionScope.login_id}">내가쓴글</a><br><br>--%>
 
 <%--헤터 부분 검색창 과 디테일 페이지 li 태그로 묶인 부분--%>
-<h1>총 ${totalCount}개의 모임이 존재합니다.</h1><br>
-    <ul class="itemlist">
-        <c:forEach var="dto" items="${list}" varStatus="i">
-        <li id="detailview">
-           <a href="detail?tr_id=${dto.tr_id}">
-            <input type="hidden" value="${dto.tr_id}">
-                <div class="detailbox">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th style="text-align: center">
-                                <fmt:parseDate var="start" value="${dto.s_date}"  pattern="yyyy-MM-dd"/>
-                                <fmt:formatDate value="${start}" pattern="MM월" /><br>
-                                <b style="font-size: 25px;"><fmt:formatDate value="${start}" pattern="dd일" /></b>
-                            </th>
-                            <th style="text-align: center; vertical-align: middle">>></th>
-                            <th style="text-align: center">
-                                <fmt:parseDate var="end" value="${dto.e_date}"  pattern="yyyy-MM-dd"/>
-                                <fmt:formatDate value="${end}" pattern="MM월" /><br>
-                                <b style="font-size: 25px;"><fmt:formatDate value="${end}" pattern="dd일"/></b>
-                            </th>
-                            <th style="text-align: center; vertical-align: middle">
-                                <c:if test="${dto.tr_cmp!=1}"><b>모집중</b></c:if>
-                                <c:if test="${dto.tr_cmp==1}"><b style="color:red">모집<br>완료</b></c:if>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td colspan="4">title: ${dto.tr_nm}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <img src="${root}/res/prfimg/${dto.ur_img}" style="width: 40px;" class="rounded-circle">
-                                주최자: ${dto.ur_nm}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" style="height: 170px;">내용: ${dto.tr_txt}</td>
-                        </tr>
-                    </table>
-                </div> <!--detailbox-->
-          </a>
-        </li>
-            <c:if test="${i.count%4==0}">
-    </ul><ul class="itemlist">
-            </c:if>
-        </c:forEach>
-    </ul>
+<h4>총 ${totalCount}개의 모임이 존재합니다.</h4><br>
+    <div class="tr-container">
+        <c:set var="on_error" value="this.src='${root}/images/noprofile.jpg'"/>
+        <div class="tr-cont-box">
+            <c:forEach items="${trlist}" var="trdto">
+            <div class="tr-card">
+                    <c:set var="loc" value="${trdto.tr_loc}"/>
+                <c:choose>
+                <c:when test="${fn:contains(loc, '서울' )}">
+                <div class="tri-card" style="background-image:url('${root}/images/서울.jpg')"></c:when>
+                    <c:when test="${fn:contains(loc, '대구' )}">
+                    <div class="tri-card" style="background-image:url('${root}/images/대구.jpg')"></c:when>
+                        <c:when test="${fn:contains(loc, '부산' )}">
+                        <div class="tri-card" style="background-image:url('${root}/images/부산.jpg')"></c:when>
+
+                            <c:when test="${fn:contains(loc, '인천' )}">
+                            <div class="tri-card" style="background-image:url('${root}/images/인천.jpg')"></c:when>
+                                <c:when test="${fn:contains(loc, '제주' )}">
+                                <div class="tri-card" style="background-image:url('${root}/images/제주.jpg')"></c:when>
+                                    <c:otherwise> <div class="tri-card" style="background-image:url('${root}/images/한국.jpg')"></c:otherwise>
+                                        </c:choose>
+                                        <span class="tr-cont-loc"><i class="bi bi-geo-alt-fill"></i>&nbsp;${trdto.tr_loc}</span>
+                                        <c:choose>
+                                            <c:when test="${trdto.tw_cnt<trdto.tw_max}">
+                                                <span class="tr-cont-tw-g">모집중<br> ${trdto.tw_cnt}/${trdto.tw_max} </span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="tr-cont-tw-r">모집완료 <br> ${trdto.tw_cnt}/${trdto.tw_max} </span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                    <a onclick="window.open('${root}/comtour/detail?tr_id=${trdto.tr_id}',
+                                            '_blank','width=1000,height=800,toolbars=no,scrollbars=no'); return false;">
+                                        <div class="tr-cont-card">
+
+                                            <div class="tr-cont-tit">${trdto.tr_nm}
+                                            </div>
+                                            <div class="tr-cont-ur"> <img class="tr-prf" src="${root}/res/prfimg/${trdto.ur_img}" onError="${on_error}"> ${trdto.ur_nk}</div>
+                                            <div class="tr-cont-date"><i class="fa-regular fa-calendar"></i> &nbsp;${trdto.s_date}~ ${trdto.e_date}</div>
+                                            <div class="tr-cont-show" style="display: none;">
+                                                <div class="tr-cont-txt"><i class="fa-regular fa-message"></i>&nbsp;${trdto.tr_txt}</div>
+                                                <hr class="tr-card-hr">
+                                                <fmt:formatDate var="u_date" value="${trdto.u_date}" pattern="yyyy/MM/dd"/>
+                                                <div class="tr-cont-bottom"><span><i class="fa-regular fa-comments"></i> &nbsp;${trdto.tm_cnt}개</span><span>${u_date}</span></div>
+                                            </div>
+                                        </div></a>
+                                </div>
+                                </c:forEach>
+                            </div>
+                        </div>
 </div> <!--wrapper-->
 
     <%--새 글 모달 영역--%>
@@ -155,6 +281,16 @@
         <div class="modal-content"></div>
     </div>
 </div>
+<script>
+    //tr
+    $("div.tr-card").hover(function (){
+        $(this).find("div.tri-card").css("height","200px");
+        $(this).find("div.tr-cont-show").show();
+    }, function (){
+        $(this).find("div.tri-card").css("height","270px");
+        $(this).find("div.tr-cont-show").hide();
+    });//tr card hover
 
+</script>
 </body>
 </html>

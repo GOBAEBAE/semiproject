@@ -7,6 +7,8 @@
 
 <head>
     <c:set var="root" value="<%=request.getContextPath()%>"/>
+    <c:set var="on_error_cf" value="this.src='${root}/images/logo1.png'"/>
+    <c:set var="on_error_prf" value="this.src='${root}/images/noprofile.jpg'"/>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
@@ -37,7 +39,7 @@
                     <li class="swiper-slide cf-card" style="width: 368px; margin-right: 16px">
                         <a href="cafe/detail?cf_id=${dto.cf_id}" class="cf-cont-box">
                             <div class="cf-img-box">
-                                <img src="${root}/images/cafeimg/${dto.ci_img}">
+                                <img src="${root}/images/cafeimg/${dto.ci_img}" onerror="${on_error_cf}">
                             </div>
                             <div class="txt-info">
                                 <div class="cf-nm">

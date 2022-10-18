@@ -135,7 +135,7 @@
         <tr> <%--타이틀 상단--%>
             <td style="width: 130px;">title</td>
             <td style="width: 400px;">${dto.tr_nm}</td>
-            <td style="width: 930px;">모임관련 정보 : 주최자(${dto.ur_nk}), 아이디(${dto.email_id})</td>
+            <td style="width: 930px;">모임관련 정보 : 주최자(${dto.ur_nk})</td>
         </tr>
 
         <tr>
@@ -182,7 +182,7 @@
 
             </td>
             <td style="width: 300px; text-align: left; vertical-align: middle">
-                <span class="plist" class="form-control">성공</span>
+                <span class="plist" class="form-control"></span>
             </td>
         </tr>
         <tr>
@@ -196,7 +196,7 @@
                     <%--</form>--%>
                 </c:if>
 
-                <span style="font-size: 30px;" id="crwnum"></span> / ${dto.tw_max}
+                <span style="font-size: 30px;" id="crwnum">${dto.tw_cnt}</span> / ${dto.tw_max}
             </td>
         </tr>
     </table>

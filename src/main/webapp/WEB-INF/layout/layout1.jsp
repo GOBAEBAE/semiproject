@@ -55,6 +55,9 @@
 </head>
 <body>
 <div class="main_layout1">
+    <c:set var="root" value="<%=request.getContextPath()%>"/>
+    <c:set var="on_error_cf" value="this.src='${root}/images/logo1.png'"/>
+    <c:set var="on_error_prf" value="${root}/images/noprofile.jpg'"/>
     <div class="main" id="header">
         <tiles:insertAttribute name="header"/>
     </div>

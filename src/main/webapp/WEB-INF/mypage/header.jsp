@@ -27,7 +27,6 @@
         }
 
         .logotitle {
-            font-family: 'GangwonEdu_OTFBoldA';
             font-style: oblique;
             font-weight: bold;
             font-size: 30px;
@@ -53,8 +52,8 @@
         li.main > a {
             display: block;
             width: 180px;
-            font-family: 'Jua';
             font-size: 20px;
+            color: #664400;
         }
 
         li.main > a:hover {
@@ -65,6 +64,7 @@
 <body>
 <!-- 로고 버튼 누르면 홈으로 -->
 <c:set var="root" value="<%=request.getContextPath()%>"/>
+<c:set var="on_error_prf" value="this.src='${root}/images/noprofile.jpg'"/>
 <a href="${root}/" class="logotitle">
     <img src="${root}/images/logosimple.png" class="rounded-circle" width="40" height="40">
     <b> Coffee With </b></a>
