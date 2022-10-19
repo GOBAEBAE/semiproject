@@ -65,7 +65,7 @@
 
         .box-type-01 {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             border-radius: 8px;
             background: #6B4804;
             margin-bottom: 20px;
@@ -219,9 +219,17 @@
             </a>
         </div>
         <div class="link-area">
-            <a href="#" class="inner">
+            <a href="${root}/mypage/tr_list" class="inner">
                 <div class="txt my-com-tr">
-                    참여중인 투어
+                    내가 모집한 투어
+                    <span class="num"></span>
+                </div>
+            </a>
+        </div>
+        <div class="link-area">
+            <a href="${root}/mypage/trcrew_list" class="inner">
+                <div class="txt my-com-tr">
+                    참가한 투어
                     <span class="num"></span>
                 </div>
             </a>

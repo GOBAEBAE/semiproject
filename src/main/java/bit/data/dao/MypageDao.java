@@ -1,5 +1,6 @@
 package bit.data.dao;
 
+import bit.data.dto.ComTourDto;
 import bit.data.dto.MyPageCafeCmtDto;
 import bit.data.dto.MyPageCafeLikeDto;
 import org.apache.ibatis.session.SqlSession;
@@ -38,5 +39,10 @@ public class MypageDao implements MypageDaoInter {
     @Override
     public List<MyPageCafeCmtDto> selectMyCmtCf(int loginId) {
         return session.selectList(ns + "selectMyCmtCf", loginId);
+    }
+
+    @Override
+    public List<ComTourDto> selectTrbyLoginId(int loginId) {
+        return session.selectList(ns+"selectTrbyLoginId",loginId);
     }
 }

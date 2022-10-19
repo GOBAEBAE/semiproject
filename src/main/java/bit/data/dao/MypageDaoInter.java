@@ -1,5 +1,6 @@
 package bit.data.dao;
 
+import bit.data.dto.ComTourDto;
 import bit.data.dto.MyPageCafeCmtDto;
 import bit.data.dto.MyPageCafeLikeDto;
 
@@ -16,4 +17,5 @@ public interface MypageDaoInter {
     public List<MyPageCafeLikeDto> selectLikeCfInfo(int urId);
 
     public List<MyPageCafeCmtDto> selectMyCmtCf(int loginId);
+    public List<ComTourDto> selectTrbyLoginId(int loginId);
 }

@@ -1,6 +1,7 @@
 package bit.data.service;
 
 import bit.data.dao.MypageDao;
+import bit.data.dto.ComTourDto;
 import bit.data.dto.MyPageCafeCmtDto;
 import bit.data.dto.MyPageCafeLikeDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,10 @@ public class MypageService implements MypageServiceInter {
     @Override
     public List<MyPageCafeCmtDto> selectMyCmtCf(int loginId) {
         return mypageDao.selectMyCmtCf(loginId);
+    }
+
+    @Override
+    public List<ComTourDto> selectTrbyLoginId(int loginId) {
+        return mypageDao.selectTrbyLoginId(loginId);
     }
 }

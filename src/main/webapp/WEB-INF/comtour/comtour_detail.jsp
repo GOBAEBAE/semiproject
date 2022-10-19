@@ -239,7 +239,6 @@ $("#delform").click(function (){
             success: function (res) {
                 if(res.count==1){
                     alert("이미참여하셨습니다.");
-
                 }else {
                     $.ajax({
                         type: "post",
@@ -252,7 +251,6 @@ $("#delform").click(function (){
                             //totalcnt=totalcnt+1;
                             plist();
                             //alert("insert 영역 : " + totalcnt);
-
 
                         }, //success
                     });//ajax

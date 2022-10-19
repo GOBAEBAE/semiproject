@@ -4,13 +4,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>NaverLogin</title>
+  <title>네이버로그인</title>
 </head>
 <body>
-<%-- Naver Login 정보 노출금지 --%>
 <%
-  String clientId = "4mIUzgdcLi_AnfbYvRiW"; // 보안
-  String redirectURI = URLEncoder.encode("http://localhost:9000/mini/callBack", "UTF-8");
+  String clientId = "jmdXIGb1YDfTvlzzrYNn";//애플리케이션 클라이언트 아이디값";
+  String redirectURI = URLEncoder.encode("http://127.0.0.1:9000/mini/", "UTF-8");
   SecureRandom random = new SecureRandom();
   String state = new BigInteger(130, random).toString();
   String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";

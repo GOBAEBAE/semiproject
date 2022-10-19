@@ -1,5 +1,6 @@
 package bit.data.service;
 
+import bit.data.dto.ComTourDto;
 import bit.data.dto.MyPageCafeCmtDto;
 import bit.data.dto.MyPageCafeLikeDto;
 
@@ -15,4 +16,5 @@ public interface MypageServiceInter {
     public List<MyPageCafeLikeDto> selectLikeCfInfo(int urId);
 
     public List<MyPageCafeCmtDto> selectMyCmtCf(int loginId);
+    public List<ComTourDto> selectTrbyLoginId(int loginId);
 }

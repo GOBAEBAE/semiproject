@@ -280,4 +280,13 @@ public class MypageController {
         return list;
     }
 
+    @GetMapping("/tr_list")
+    public String selectTrbyLoginId(HttpSession session, Model model){
+        int loginId = (int) session.getAttribute("login_id");
+        List<ComTourDto> trlist=mypageService.selectTrbyLoginId(loginId);
+        int tr_cnt=mypageService.selectTrbyLoginId(loginId).size();
+        model.addAttribute("trlist",trlist);
+        model.addAttribute("tr_cnt",tr_cnt);
+        return "/cmain/mypage/cont_tr";
+    }
 }

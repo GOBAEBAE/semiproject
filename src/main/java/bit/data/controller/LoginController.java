@@ -62,7 +62,7 @@ public class LoginController {
 
     @GetMapping("/naver_callback")
     public String naverCallback(HttpSession session) {
-        return "/bit/login/naver_callback";
+        return "redirect:../";
     }
 
     //네이버 회원가입&로그인
@@ -113,8 +113,8 @@ public class LoginController {
         session.removeAttribute("login_nick");
         session.removeAttribute("login_img");
         // 로그아웃시 메인 화면으로 보내기
-        //return "redirect:../";
-        return "/bit/layout/main";
+        return "redirect:../";
+        //return "/bit/layout/main";
     }
 
     // 로그아웃 - User Cotroller

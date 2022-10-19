@@ -53,6 +53,11 @@
         order by cc.w_date desc;
     </select>
 
+    <select id="selectTrbyLoginId" parameterType="int" resultType="ctdto">
+        SELECT * FROM tr where ur_id=#{loginId}
+        order by tr.w_date desc;
+    </select>
+
 </mapper>
 
 
