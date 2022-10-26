@@ -224,55 +224,61 @@
 
 <%--헤터 부분 검색창 과 디테일 페이지 li 태그로 묶인 부분--%>
 <h4>총 ${totalCount}개의 모임이 존재합니다.</h4><br>
+    <h5>
+    <label><input type="checkbox" id="ing"/> 모집중</label> &nbsp;&nbsp;
+    <c:if test="${sessionScope.login_ok=='yes'}">
+        <label><input type="checkbox" id="mytour"/> ${sessionScope.login_nick}님이 주최한 모임</label>
+    </c:if>
+    </h5>
+    <br>
     <div class="tr-container">
         <c:set var="on_error" value="this.src='${root}/images/noprofile.jpg'"/>
         <div class="tr-cont-box">
             <c:forEach items="${trlist}" var="trdto">
-            <div class="tr-card">
+            <div class="tr-card" ur_id="${trdto.ur_id}">
                     <c:set var="loc" value="${trdto.tr_loc}"/>
                 <c:choose>
-                <c:when test="${fn:contains(loc, '서울' )}">
-                <div class="tri-card" style="background-image:url('${root}/images/서울.jpg')"></c:when>
+                    <c:when test="${fn:contains(loc, '서울' )}">
+                    <div class="tri-card" style="background-image:url('${root}/images/서울.jpg')"></c:when>
                     <c:when test="${fn:contains(loc, '대구' )}">
                     <div class="tri-card" style="background-image:url('${root}/images/대구.jpg')"></c:when>
-                        <c:when test="${fn:contains(loc, '부산' )}">
-                        <div class="tri-card" style="background-image:url('${root}/images/부산.jpg')"></c:when>
+                    <c:when test="${fn:contains(loc, '부산' )}">
+                    <div class="tri-card" style="background-image:url('${root}/images/부산.jpg')"></c:when>
+                    <c:when test="${fn:contains(loc, '인천' )}">
+                    <div class="tri-card" style="background-image:url('${root}/images/인천.jpg')"></c:when>
+                    <c:when test="${fn:contains(loc, '제주' )}">
+                    <div class="tri-card" style="background-image:url('${root}/images/제주.jpg')"></c:when>
+                    <c:otherwise> <div class="tri-card" style="background-image:url('${root}/images/한국.jpg')"></c:otherwise>
+                </c:choose>
+                <span class="tr-cont-loc"><i class="bi bi-geo-alt-fill"></i>&nbsp;${trdto.tr_loc}</span>
+                <c:choose>
+                    <c:when test="${trdto.tw_cnt<trdto.tw_max}">
+                        <span class="tr-cont-tw-g">모집중<br> ${trdto.tw_cnt}/${trdto.tw_max} </span>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="tr-cont-tw-r">모집완료 <br> ${trdto.tw_cnt}/${trdto.tw_max} </span>
+                    </c:otherwise>
+                </c:choose>
+                </div>
+                <a onclick="window.open('${root}/comtour/detail?tr_id=${trdto.tr_id}',
+                        '_blank','width=1000,height=800,toolbars=no,scrollbars=no'); return false;">
+                    <div class="tr-cont-card">
 
-                            <c:when test="${fn:contains(loc, '인천' )}">
-                            <div class="tri-card" style="background-image:url('${root}/images/인천.jpg')"></c:when>
-                                <c:when test="${fn:contains(loc, '제주' )}">
-                                <div class="tri-card" style="background-image:url('${root}/images/제주.jpg')"></c:when>
-                                    <c:otherwise> <div class="tri-card" style="background-image:url('${root}/images/한국.jpg')"></c:otherwise>
-                                        </c:choose>
-                                        <span class="tr-cont-loc"><i class="bi bi-geo-alt-fill"></i>&nbsp;${trdto.tr_loc}</span>
-                                        <c:choose>
-                                            <c:when test="${trdto.tw_cnt<trdto.tw_max}">
-                                                <span class="tr-cont-tw-g">모집중<br> ${trdto.tw_cnt}/${trdto.tw_max} </span>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <span class="tr-cont-tw-r">모집완료 <br> ${trdto.tw_cnt}/${trdto.tw_max} </span>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                    <a onclick="window.open('${root}/comtour/detail?tr_id=${trdto.tr_id}',
-                                            '_blank','width=1000,height=800,toolbars=no,scrollbars=no'); return false;">
-                                        <div class="tr-cont-card">
-
-                                            <div class="tr-cont-tit">${trdto.tr_nm}
-                                            </div>
-                                            <div class="tr-cont-ur"> <img class="tr-prf" src="${root}/res/prfimg/${trdto.ur_img}" onError="${on_error}"> ${trdto.ur_nk}</div>
-                                            <div class="tr-cont-date"><i class="fa-regular fa-calendar"></i> &nbsp;${trdto.s_date}~ ${trdto.e_date}</div>
-                                            <div class="tr-cont-show" style="display: none;">
-                                                <div class="tr-cont-txt"><i class="fa-regular fa-message"></i>&nbsp;${trdto.tr_txt}</div>
-                                                <hr class="tr-card-hr">
-                                                <fmt:formatDate var="u_date" value="${trdto.u_date}" pattern="yyyy/MM/dd"/>
-                                                <div class="tr-cont-bottom"><span><i class="fa-regular fa-comments"></i> &nbsp;${trdto.tm_cnt}개</span><span>${u_date}</span></div>
-                                            </div>
-                                        </div></a>
-                                </div>
-                                </c:forEach>
-                            </div>
+                        <div class="tr-cont-tit">${trdto.tr_nm}
                         </div>
+                        <div class="tr-cont-ur"> <img class="tr-prf" src="${root}/res/prfimg/${trdto.ur_img}" onError="${on_error}"> ${trdto.ur_nk}</div>
+                        <div class="tr-cont-date"><i class="fa-regular fa-calendar"></i> &nbsp;${trdto.s_date}~ ${trdto.e_date}</div>
+                        <div class="tr-cont-show" style="display: none;">
+                            <div class="tr-cont-txt"><i class="fa-regular fa-message"></i>&nbsp;${trdto.tr_txt}</div>
+                            <hr class="tr-card-hr">
+                            <fmt:formatDate var="u_date" value="${trdto.u_date}" pattern="yyyy/MM/dd"/>
+                            <div class="tr-cont-bottom"><span><i class="fa-regular fa-comments"></i> &nbsp;${trdto.tm_cnt}개</span><span>${u_date}</span></div>
+                        </div>
+                    </div></a>
+            </div>
+            </c:forEach>
+        </div>
+    </div>
 </div> <!--wrapper-->
 
     <%--새 글 모달 영역--%>
@@ -290,6 +296,27 @@
         $(this).find("div.tri-card").css("height","270px");
         $(this).find("div.tr-cont-show").hide();
     });//tr card hover
+    //모집중클릭
+    $("#ing").click(function (){
+        if($(this).is(":checked")){
+            $(".tr-cont-tw-r").parent().parent().hide();
+        }else {
+            $(".tr-cont-tw-r").parent().parent().show();
+        }
+    });
+    //내가 주최한 모임
+    $("#mytour").click(function (){
+        if($(this).is(":checked")){
+           $(".tr-card").each(function(){
+               var did=$(this).attr("ur_id");
+               if(did!=${sessionScope.login_id}){
+                   $(this).hide();
+               }
+           })
+        }else {
+            $(".tr-card").show();
+        }
+    });
 
 </script>
 </body>
