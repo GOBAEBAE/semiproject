@@ -309,7 +309,7 @@
         if($(this).is(":checked")){
            $(".tr-card").each(function(){
                var did=$(this).attr("ur_id");
-               if(did!=${sessionScope.login_id}){
+               if(did!="${sessionScope.login_id}"){
                    $(this).hide();
                }
            })
