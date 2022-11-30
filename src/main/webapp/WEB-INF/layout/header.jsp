@@ -32,7 +32,9 @@
             font-weight: bold;
             font-size: 30px;
         }
-
+        .menu{
+            margin-left: 20%;
+        }
         #btnlogin {
             margin-left: 200px;
         }
